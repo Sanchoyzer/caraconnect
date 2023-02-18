@@ -1,0 +1,76 @@
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+exclude = [
+    ".git",
+    ".mypy_cache",
+    ".pytest_cache",
+    "venv",
+]
+select = ["ALL"]
+ignore = [
+    "ANN101",
+    "EM",
+    "D100", "D101", "D102", "D103", "D104", "D105", "D107", "D203", "D212",
+    "TRY003",
+]
+
+[tool.ruff.flake8-quotes]
+inline-quotes = "single"
+
+[tool.ruff.isort]
+lines-after-imports = 2
+known-first-party = ["my_proj"]
+
+
+[tool.black]
+line-length = 100
+target-version = ['py310']
+exclude = '''
+/(
+  | \.git
+  | \.venv
+  | \.mypy_cache
+  | \.pytest_cache
+  | \.ruff_cache
+)/
+'''
+skip-string-normalization = true
+
+
+[tool.mypy]
+python_version = '3.10'
+show_error_context = true
+check_untyped_defs = true
+exclude = ['^.git/', '^venv/', '^.mypy_cache/', '^.pytest_cache/', '^.ruff_cache/']
+
+
+[tool.pytest.ini_options]
+minversion = '6.0'
+addopts = '-s'
+testpaths = [
+    'tests',
+]
+
+
+[tool.poetry]
+name = "PythonProject"
+version = "0.1.0"
+description = "My cool project"
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.group.dev.dependencies]
+faker = "^17.0.0"
+pytest = "^7.2.1"
+pytest-sugar = "^0.9.6"
+mypy = "^1.0.1"
+ruff = "^0.0.247"
+black = "^23.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
