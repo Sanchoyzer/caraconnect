@@ -1,5 +1,5 @@
 from bisect import bisect
-from random import random
+from secrets import SystemRandom
 from typing import TypeVar
 
 from my_proj.helpers import is_float_equal
@@ -11,6 +11,7 @@ TypeProbabilities = list[float]
 
 
 class RandomGen:
+    _random: SystemRandom
     __values: TypeValues
     __probabilities: TypeProbabilities
     __probabilities_accumulated: TypeProbabilities
@@ -32,6 +33,7 @@ class RandomGen:
         self._check(values, probabilities)
         self.__values = values
         self.__probabilities = probabilities
+        self._random = SystemRandom()
 
         self.__probabilities_accumulated = []
         prev_items_sum = 0.0
@@ -53,4 +55,4 @@ class RandomGen:
 
     def next_num(self) -> type[T]:
         """Return an item from given values using given probabilities."""
-        return self.__values[bisect(self.__probabilities_accumulated, random())]
+        return self.__values[bisect(self.__probabilities_accumulated, self._random.random())]
