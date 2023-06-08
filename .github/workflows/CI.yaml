@@ -1,6 +1,13 @@
 name: linters & tests
 
-on: [ push, workflow_dispatch ]
+on:
+  push:
+    paths:
+      - '.github/**/*'
+      - 'pyproject.toml'
+      - 'my_proj/**/*'
+      - 'tests/**/*'
+  workflow_dispatch:
 
 env:
   CI: true
@@ -15,8 +22,8 @@ jobs:
     needs: [ notify-start ]
     runs-on: ubuntu-latest
     env:
-        PROJ_PATH: ./my_proj
-        TESTS_PATH: ./tests
+      PROJ_PATH: ./my_proj
+      TESTS_PATH: ./tests
 
     steps:
       - uses: actions/checkout@v3
@@ -27,13 +34,13 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-            python-version: '3.11'
-            cache: 'poetry'
+          python-version: '3.11'
+          cache: 'poetry'
 
       - name: Install Dependencies
         run: |
-            poetry env use 3.11
-            poetry install
+          poetry env use 3.11
+          poetry install
 
       - name: Run Black
         run: poetry run black --check --diff $PROJ_PATH $TESTS_PATH
