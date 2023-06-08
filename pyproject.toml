@@ -47,6 +47,10 @@ check_untyped_defs = true
 exclude = ['^.git/', '^venv/', '^.mypy_cache/', '^.pytest_cache/', '^.ruff_cache/', '^.github/',]
 
 
+[tool.bandit]
+exclude_dirs = ['tests',]
+
+
 [tool.pytest.ini_options]
 minversion = '6.0'
 addopts = '-s -n auto'
@@ -70,6 +74,7 @@ python = '^3.11'
 mypy = '^1.0.1'
 ruff = '^0.0.272'
 black = '^23.1.0'
+bandit = '^1.7.5'
 
 [tool.poetry.group.test.dependencies]
 faker = '^18.0.0'
