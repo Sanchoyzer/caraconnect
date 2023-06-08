@@ -60,19 +60,22 @@ name = 'PythonProject'
 version = '0.1.0'
 description = 'My cool project'
 authors = ['Your Name <you@example.com>']
+readme = "README.md"
+repository = "https://github.com/Sanchoyzer/caraconnect"
 
 [tool.poetry.dependencies]
 python = '^3.11'
 
 [tool.poetry.group.dev.dependencies]
+mypy = '^1.0.1'
+ruff = '^0.0.272'
+black = '^23.1.0'
+
+[tool.poetry.group.test.dependencies]
 faker = '^18.0.0'
 pytest = '^7.2.1'
 pytest-sugar = '^0.9.6'
 pytest-xdist = '^3.3.1'
-mypy = '^1.0.1'
-ruff = '^0.0.269'
-black = '^23.1.0'
-
 
 [build-system]
 requires = ['poetry-core']
