@@ -1,3 +1,15 @@
+[![Python](https://img.shields.io/badge/Python-3.11-3776AB.svg?style=flat&logo=python&logoColor=ffdd54)](https://www.python.org)
+[![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?logo=githubactions&logoColor=white)](https://github.com/Sanchoyzer/caraconnect/actions)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/y/Sanchoyzer/caraconnect)
+![GitHub last commit](https://img.shields.io/github/last-commit/Sanchoyzer/caraconnect)
+
+[![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
+[![bandit](https://img.shields.io/badge/security-bandit-green.svg)](https://github.com/PyCQA/bandit)
+
+---
+
 Implement the method `nextNum()` and an effective set of deterministic unit tests.
 Make sure your code is exemplary, as if it was going to be shipped as part of a production system.
 
