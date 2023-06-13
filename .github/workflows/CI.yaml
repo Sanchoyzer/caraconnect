@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/**/*'
       - 'pyproject.toml'
+      - 'poetry.lock'
       - 'my_proj/**/*'
       - 'tests/**/*'
   workflow_dispatch:
