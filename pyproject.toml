@@ -70,12 +70,12 @@ repository = 'https://github.com/Sanchoyzer/caraconnect'
 
 [tool.poetry.dependencies]
 python = '^3.11'
-fastapi = '^0.97.0'
+fastapi = '^0'
 uvicorn = {extras = ['standard'], version = '^0.22.0'}
 
 [tool.poetry.group.dev.dependencies]
 mypy = '^1.0.1'
-ruff = '^0.0.272'
+ruff = '~0.0.272'
 black = '^23.1.0'
 bandit = '^1.7.5'
 

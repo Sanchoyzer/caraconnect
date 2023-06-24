@@ -1,6 +1,6 @@
 from bisect import bisect
 from secrets import SystemRandom
-from typing import TypeVar
+from typing import ClassVar, TypeVar
 from uuid import UUID, uuid4
 
 from app.exceptions.rand_gen import RandGenNotFoundError
@@ -64,7 +64,7 @@ class RandomGen:
 
 
 class RandGenService:
-    storage: dict[UUID, RandomGen] = {}
+    storage: ClassVar[dict[UUID, RandomGen]] = {}
 
     @classmethod
     def set_params(cls: type['RandGenService'], params: SetParamsRequest) -> SetParamsResponse:
