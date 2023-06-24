@@ -7,14 +7,19 @@ def path_create():
     return '/v1/rand_gen'
 
 
-@pytest.fixture
-def path_get(path_create, uid):
-    return f'{path_create}/{uid}'
+@pytest.fixture(scope='session')
+def path_get_template():
+    return '/v1/rand_gen/{uid}'
 
 
 @pytest.fixture
-def path_get_fake(path_create, faker):
-    return f'{path_create}/{faker.uuid4()}'
+def path_get(path_get_template, uid):
+    return path_get_template.format(uid=uid)
+
+
+@pytest.fixture
+def path_get_fake(path_get_template, faker):
+    return path_get_template.format(uid=faker.uuid4())
 
 
 @pytest.fixture
@@ -36,12 +41,20 @@ def probabilities(faker, count_items):
     return [round(i / tmp_sum, 4) for i in tmp]
 
 
+@pytest.fixture()
+def f_create_params(path_create, client, values, probabilities):
+    def inner():
+        payload = {'values': values, 'probabilities': probabilities}
+        r = client.post(path_create, json=payload)
+        assert r.status_code == status.HTTP_200_OK, r.text
+        return r.json()['uid']
+
+    return inner
+
+
 @pytest.fixture(name='uid')
-def create_params(path_create, client, values, probabilities):
-    payload = {'values': values, 'probabilities': probabilities}
-    r = client.post(path_create, json=payload)
-    assert r.status_code == status.HTTP_200_OK, r.text
-    return r.json()['uid']
+def create_params(f_create_params):
+    return f_create_params()
 
 
 class TestSetParams:
@@ -109,6 +122,12 @@ class TestGetValues:
         assert r.status_code == status.HTTP_200_OK, r.text
         assert (r_json := r.json()) and len(r_json['values']) == 1, r.text
         assert r_json['values'][0] in values
+
+    def test_ok_several_input_data(self, client, path_get_template, faker, f_create_params):
+        for uid in [f_create_params() for _ in range(faker.pyint(min_value=2, max_value=9))]:
+            r = client.get(path_get_template.format(uid=uid))
+            assert r.status_code == status.HTTP_200_OK, r.text
+            assert (r_json := r.json()) and len(r_json['values']) == 1, r.text
 
     def test_ok_several_values(self, client, path_get, faker, values):
         amount = faker.pyint(min_value=2, max_value=9)
