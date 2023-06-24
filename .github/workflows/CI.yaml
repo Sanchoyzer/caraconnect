@@ -6,7 +6,7 @@ on:
       - '.github/**/*'
       - 'pyproject.toml'
       - 'poetry.lock'
-      - 'my_proj/**/*'
+      - 'app/**/*'
       - 'tests/**/*'
   workflow_dispatch:
 
@@ -23,7 +23,7 @@ jobs:
     needs: [ notify-start ]
     runs-on: ubuntu-latest
     env:
-      PROJ_PATH: ./my_proj
+      PROJ_PATH: ./app
       TESTS_PATH: ./tests
 
     steps:

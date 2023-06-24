@@ -10,10 +10,10 @@ exclude = [
 ]
 select = ['ALL']
 ignore = [
-    'ANN101',
-    'EM',
-    'D100', 'D101', 'D102', 'D103', 'D104', 'D105', 'D107', 'D203', 'D212',
-    'TRY003',
+    'ANN101',  # missing-type-self
+    'EM',  # flake8-errmsg
+    'D100', 'D101', 'D102', 'D103', 'D104', 'D105', 'D107', 'D203', 'D212',  # pydocstyle
+    'TRY003',  # Avoid specifying long messages outside the exception class
 ]
 
 [tool.ruff.flake8-quotes]
@@ -21,7 +21,7 @@ inline-quotes = 'single'
 
 [tool.ruff.isort]
 lines-after-imports = 2
-known-first-party = ['my_proj']
+known-first-party = ['app']
 
 
 [tool.black]
@@ -45,6 +45,7 @@ python_version = '3.11'
 show_error_context = true
 check_untyped_defs = true
 exclude = ['^.git/', '^venv/', '^.mypy_cache/', '^.pytest_cache/', '^.ruff_cache/', '^.github/',]
+plugins = ['pydantic.mypy']
 
 
 [tool.bandit]
@@ -64,11 +65,13 @@ name = 'PythonProject'
 version = '0.1.0'
 description = 'My cool project'
 authors = ['Your Name <you@example.com>']
-readme = "README.md"
-repository = "https://github.com/Sanchoyzer/caraconnect"
+readme = 'README.md'
+repository = 'https://github.com/Sanchoyzer/caraconnect'
 
 [tool.poetry.dependencies]
 python = '^3.11'
+fastapi = '^0.97.0'
+uvicorn = {extras = ['standard'], version = '^0.22.0'}
 
 [tool.poetry.group.dev.dependencies]
 mypy = '^1.0.1'
@@ -81,6 +84,8 @@ faker = '^18.0.0'
 pytest = '^7.2.1'
 pytest-sugar = '^0.9.6'
 pytest-xdist = '^3.3.1'
+pytest-cov = '^4.1.0'
+httpx = '^0.24.1'
 
 [build-system]
 requires = ['poetry-core']

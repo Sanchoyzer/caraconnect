@@ -1,15 +1,9 @@
 from collections import Counter
 
 import pytest
-from faker import Faker
 
-from my_proj.helpers import is_float_equal
-from my_proj.main import RandomGen
-
-
-@pytest.fixture(scope='session')
-def faker():
-    return Faker()
+from app.services.helpers import is_float_equal
+from app.services.rand_gen import RandomGen
 
 
 @pytest.fixture
@@ -38,7 +32,7 @@ def rand_gen(values, probabilities):
 
 def test_ok(rand_gen, faker):
     amount_of_repetitions = faker.pyint(min_value=10**6, max_value=5 * 10**6)
-    c = Counter(rand_gen.next_num() for _ in range(amount_of_repetitions))
+    c = Counter(rand_gen.next_val() for _ in range(amount_of_repetitions))
     result = {k: v / amount_of_repetitions for k, v in dict(c).items()}
 
     expected = dict(zip(rand_gen.values, rand_gen.probabilities, strict=True))
@@ -52,7 +46,7 @@ def test_creation_incorrect_len(values, probabilities):
     with pytest.raises(ValueError, match=r'Different lens: \d != \d'):
         RandomGen(values=values_short, probabilities=probabilities)
 
-    probabilities_short = values[1:]
+    probabilities_short = probabilities[1:]
     with pytest.raises(ValueError, match=r'Different lens: \d != \d'):
         RandomGen(values=values, probabilities=probabilities_short)
 

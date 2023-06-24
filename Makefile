@@ -1,4 +1,4 @@
-PROJ_PATH   ?= my_proj
+PROJ_PATH   ?= app
 TESTS_PATH  ?= tests
 
 ### linters ###
@@ -26,7 +26,7 @@ check: black ruff mypy bandit
 
 .PHONY: tests
 tests:
-	pytest
+	pytest --cov-report term-missing --cov=app
 
 ### setup ###
 

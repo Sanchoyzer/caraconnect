@@ -10,6 +10,8 @@
 
 ---
 
+### Original task
+
 Implement the method `nextNum()` and an effective set of deterministic unit tests.
 Make sure your code is exemplary, as if it was going to be shipped as part of a production system.
 
