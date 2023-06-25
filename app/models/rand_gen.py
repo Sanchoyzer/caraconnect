@@ -39,3 +39,9 @@ class SetParamsResponse(SetParamsRequest):
 
 class GetValuesResponse(BaseModel):
     values: list
+
+
+class RandGenSource(BaseModel):
+    uid: UUID
+    values: list[Any]
+    probabilities: list[float]

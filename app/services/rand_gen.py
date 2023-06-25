@@ -1,10 +1,14 @@
 from bisect import bisect
 from secrets import SystemRandom
-from typing import ClassVar, TypeVar
-from uuid import UUID, uuid4
+from typing import TypeVar
+from uuid import UUID
 
-from app.exceptions.rand_gen import RandGenNotFoundError
-from app.models.rand_gen import GetValuesResponse, SetParamsRequest, SetParamsResponse
+from app.models.rand_gen import (
+    GetValuesResponse,
+    SetParamsRequest,
+    SetParamsResponse,
+)
+from app.repositories.rand_gen import repo
 from app.services.helpers import is_float_equal
 
 
@@ -64,20 +68,17 @@ class RandomGen:
 
 
 class RandGenService:
-    storage: ClassVar[dict[UUID, RandomGen]] = {}
-
     @classmethod
     def set_params(cls: type['RandGenService'], params: SetParamsRequest) -> SetParamsResponse:
-        uid = uuid4()
-        cls.storage[uid] = RandomGen(values=params.values, probabilities=params.probabilities)
+        source = repo.rand_gen.create(params=params)
         return SetParamsResponse(
-            uid=uid,
-            values=cls.storage[uid].values,
-            probabilities=cls.storage[uid].probabilities,
+            uid=source.uid,
+            values=source.values,
+            probabilities=source.probabilities,
         )
 
     @classmethod
     def get_values(cls: type['RandGenService'], uid: UUID, amount: int) -> GetValuesResponse:
-        if not (rand_gen := cls.storage.get(uid)):
-            raise RandGenNotFoundError(f'uid = "{uid}" not found')
+        source = repo.rand_gen.get(uid=uid)
+        rand_gen = RandomGen(values=source.values, probabilities=source.probabilities)
         return GetValuesResponse(values=[rand_gen.next_val() for _ in range(amount)])

@@ -12,8 +12,9 @@ select = ['ALL']
 ignore = [
     'ANN101',  # missing-type-self
     'EM',  # flake8-errmsg
-    'D100', 'D101', 'D102', 'D103', 'D104', 'D105', 'D107', 'D203', 'D212',  # pydocstyle
+    'D100', 'D101', 'D102', 'D103', 'D104', 'D105', 'D106', 'D107', 'D203', 'D212',  # pydocstyle
     'TRY003',  # Avoid specifying long messages outside the exception class
+    'PD011',  # False positive, see https://github.com/astral-sh/ruff/issues/2480
 ]
 
 [tool.ruff.flake8-quotes]
@@ -61,10 +62,10 @@ testpaths = [
 
 
 [tool.poetry]
-name = 'PythonProject'
+name = 'CaraConnect'
 version = '0.1.0'
 description = 'My cool project'
-authors = ['Your Name <you@example.com>']
+authors = ['Sanchoyzer']
 readme = 'README.md'
 repository = 'https://github.com/Sanchoyzer/caraconnect'
 
