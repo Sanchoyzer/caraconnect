@@ -26,7 +26,7 @@ check: black ruff mypy bandit
 
 .PHONY: tests
 tests:
-	pytest --cov-report term-missing --cov=app
+	pytest --cov-report term-missing --cov=app --durations=3
 
 ### setup ###
 
