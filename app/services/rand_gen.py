@@ -69,7 +69,10 @@ class RandomGen:
 
 class RandGenService:
     @classmethod
-    def set_params(cls: type['RandGenService'], params: SetParamsRequest) -> SetParamsResponse:
+    async def set_params(
+        cls: type['RandGenService'],
+        params: SetParamsRequest,
+    ) -> SetParamsResponse:
         source = repo.rand_gen.create(params=params)
         return SetParamsResponse(
             uid=source.uid,
@@ -78,7 +81,7 @@ class RandGenService:
         )
 
     @classmethod
-    def get_values(cls: type['RandGenService'], uid: UUID, amount: int) -> GetValuesResponse:
+    async def get_values(cls: type['RandGenService'], uid: UUID, amount: int) -> GetValuesResponse:
         source = repo.rand_gen.get(uid=uid)
         rand_gen = RandomGen(values=source.values, probabilities=source.probabilities)
         return GetValuesResponse(values=[rand_gen.next_val() for _ in range(amount)])

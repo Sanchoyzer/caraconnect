@@ -43,4 +43,4 @@ update:
 
 .PHONY: up
 up:
-	uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
+	TARGET=development docker compose up --build

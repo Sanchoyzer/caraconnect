@@ -7,7 +7,8 @@ def path_():
     return '/health'
 
 
-def test_health(client, path_):
-    r = client.get(path_)
+@pytest.mark.asyncio()
+async def test_health(client, path_):
+    r = await client.get(path_)
     assert r.status_code == status.HTTP_200_OK, r.text
     assert (r_json := r.json()) and r_json.keys() == {'up_since', 'version'}
