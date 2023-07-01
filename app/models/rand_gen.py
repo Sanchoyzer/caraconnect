@@ -1,4 +1,4 @@
-from typing import Annotated, Any
+from typing import Annotated, Any, Final
 from uuid import UUID
 
 from fastapi import Body
@@ -10,6 +10,16 @@ from app.services.helpers import is_float_equal
 class SetParamsRequest(BaseModel):
     values: Annotated[list[Any], Body(min_items=1)]
     probabilities: Annotated[list[float], Body(min_items=1)]
+
+    class Config:
+        schema_extra: Final[dict[str, Any]] = {
+            'examples': [
+                {
+                    'values': [-3, 0, 2, 42, 69],
+                    'probabilities': [0.01, 0.3, 0.58, 0.1, 0.01],
+                },
+            ],
+        }
 
     @validator('values')
     def check_values(cls, v: list[Any]) -> list[Any]:  # noqa: N805
@@ -33,8 +43,10 @@ class SetParamsRequest(BaseModel):
         return v
 
 
-class SetParamsResponse(SetParamsRequest):
+class SetParamsResponse(BaseModel):
     uid: UUID
+    values: Annotated[list[Any], Body(min_items=1)]
+    probabilities: Annotated[list[float], Body(min_items=1)]
 
 
 class GetValuesResponse(BaseModel):
