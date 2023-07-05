@@ -13,3 +13,8 @@ started: Final[str] = datetime.now(tz=UTC).isoformat()
 @health_router.get('')
 async def ready() -> dict[str, str]:
     return {'up_since': started, 'version': __VERSION__}
+
+
+@health_router.get('/failed')
+async def failed() -> None:
+    raise RuntimeError('test')

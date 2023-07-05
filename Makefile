@@ -44,3 +44,8 @@ update:
 .PHONY: up
 up:
 	TARGET=development docker compose up --build
+
+
+.PHONY: down
+down:
+	TARGET=development docker compose down

@@ -3,10 +3,14 @@ from starlette.middleware.cors import CORSMiddleware
 
 from app import __VERSION__
 from app.routers import app_router
+from app.sentry import setup_sentry
 from app.settings import conf
 
 
-def get_app(*, testing: bool = False) -> FastAPI:  # noqa: ARG001
+def get_app(*, testing: bool = False) -> FastAPI:
+    if conf.SENTRY_DSN and not conf.CI and not testing:
+        setup_sentry(dsn=conf.SENTRY_DSN)
+
     app_ = FastAPI(
         title='API',
         version=__VERSION__,

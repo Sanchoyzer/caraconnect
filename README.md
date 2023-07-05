@@ -1,7 +1,9 @@
-[![Python](https://img.shields.io/badge/Python-3.11-3776AB.svg?style=flat&logo=python&logoColor=ffdd54)](https://www.python.org)
-[![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?logo=githubactions&logoColor=white)](https://github.com/Sanchoyzer/caraconnect/actions)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/Sanchoyzer/caraconnect)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Sanchoyzer/caraconnect)
+
+[![Python](https://img.shields.io/badge/Python-3.11-3776AB.svg?style=flat&logo=python&logoColor=ffdd54)](https://www.python.org)
+[![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?logo=githubactions&logoColor=white)](https://github.com/Sanchoyzer/caraconnect/actions)
+[![Sentry](https://img.shields.io/static/v1?message=Sentry&color=362D59&logo=Sentry&logoColor=FFFFFF&label=)](https://sentry.io)
 
 [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
