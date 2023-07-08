@@ -43,7 +43,7 @@ update:
 
 .PHONY: up
 up:
-	TARGET=development docker compose up --build
+	TARGET=development docker compose up --build -d
 
 
 .PHONY: down

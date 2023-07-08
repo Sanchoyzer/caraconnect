@@ -1,3 +1,5 @@
+from typing import Final
+
 import pytest
 import pytest_asyncio
 from fastapi import status
@@ -89,8 +91,9 @@ class TestSetParams:
         r = await client.post(path_create, json=payload)
         assert r.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, r.text
         assert (r_json := r.json())
+        error_msg: Final[str] = 'List should have at least 1 item after validation, not 0'
         for i in range(len(payload)):
-            assert 'ensure this value has at least 1 items' in r_json['detail'][i]['msg'], r_json
+            assert r_json['detail'][i]['msg'] == error_msg, r_json
 
     @pytest.mark.asyncio()
     async def test_creation_non_uniq_values(self, client, path_create, values, probabilities):
