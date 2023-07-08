@@ -1,3 +1,4 @@
+import newrelic.agent
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
@@ -10,6 +11,9 @@ from app.settings import conf
 def get_app(*, testing: bool = False) -> FastAPI:
     if conf.SENTRY_DSN and not conf.CI and not testing:
         setup_sentry(dsn=conf.SENTRY_DSN)
+
+    if conf.NEW_RELIC_LICENSE_KEY and not conf.CI and not testing:
+        newrelic.agent.initialize()
 
     app_ = FastAPI(
         title='API',

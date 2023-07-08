@@ -2,8 +2,12 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    SENTRY_DSN: str | None = None
     CI: bool = False
+
+    SENTRY_DSN: str | None = None
+
+    NEW_RELIC_CONFIG_FILE: str = 'newrelic.ini'
+    NEW_RELIC_LICENSE_KEY: str | None = None
 
     @staticmethod
     def fastapi_docs_url() -> str:
