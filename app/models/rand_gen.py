@@ -1,8 +1,8 @@
-from typing import Annotated, Any, Final
+from typing import Annotated, Any, ClassVar
 from uuid import UUID
 
 from fastapi import Body
-from pydantic import BaseModel, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 from app.services.helpers import is_float_equal
 
@@ -11,15 +11,16 @@ class SetParamsRequest(BaseModel):
     values: Annotated[list[Any], Body(min_length=1)]
     probabilities: Annotated[list[float], Body(min_length=1)]
 
-    class Config:
-        json_schema_extra: Final[dict[str, Any]] = {
+    model_config: ClassVar[ConfigDict] = {
+        'json_schema_extra': {
             'examples': [
                 {
                     'values': [-3, 0, 2, 42, 69],
                     'probabilities': [0.01, 0.3, 0.58, 0.1, 0.01],
                 },
             ],
-        }
+        },
+    }
 
     @field_validator('values')
     def check_values(cls, v: list[Any]) -> list[Any]:  # noqa: N805

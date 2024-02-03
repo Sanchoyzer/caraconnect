@@ -24,6 +24,14 @@ inline-quotes = 'single'
 lines-after-imports = 2
 known-first-party = ['app']
 
+[tool.ruff.extend-per-file-ignores]
+"tests/*" = [
+    "ANN",  # flake8-annotations
+    "PT001",  # Use @pytest.fixture{expected} over @pytest.fixture{actual}
+    "S101",  # Use of assert detected
+    "PT018",  # Assertion should be broken down into multiple parts
+]
+
 
 [tool.black]
 line-length = 100
@@ -55,7 +63,7 @@ exclude_dirs = ['tests',]
 
 [tool.pytest.ini_options]
 minversion = '6.0'
-addopts = '-s -n auto'
+addopts = '-s -n auto --dup-fixtures'
 testpaths = [
     'tests',
 ]
@@ -78,8 +86,8 @@ sentry-sdk = {extras = ['fastapi'], version = '^1.27.0'}
 httpx = '^0.24.1'
 
 [tool.poetry.group.dev.dependencies]
-mypy = '^1.0.1'
-ruff = '~0.0.272'
+mypy = '^1.8.0'
+ruff = '^0.1.15'
 black = '^23.1.0'
 bandit = '^1.7.5'
 
@@ -90,6 +98,8 @@ pytest-sugar = '^0.9.6'
 pytest-xdist = '^3.3.1'
 pytest-cov = '^4.1.0'
 pytest-asyncio = '^0.21.0'
+pytest-randomly = '^3.15.0'
+pytest-deadfixtures = '^2.2.1'
 
 [build-system]
 requires = ['poetry-core']

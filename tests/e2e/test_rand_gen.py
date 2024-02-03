@@ -26,11 +26,6 @@ def path_get_fake(path_get_template, faker):
 
 
 @pytest.fixture
-def count_items(faker):
-    return faker.pyint(min_value=2, max_value=9)
-
-
-@pytest.fixture
 def values(faker, count_items):
     result = [faker.unique.pyint(min_value=-100, max_value=100) for _ in range(count_items)]
     faker.unique.clear()
@@ -125,7 +120,7 @@ class TestSetParams:
         values,
         probabilities,
     ):
-        probabilities = [i + 0.1 for i in probabilities]
+        probabilities = [i + 0.01 for i in probabilities]
         payload = {'values': values, 'probabilities': probabilities}
         r = await client.post(path_create, json=payload)
         assert r.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, r.text

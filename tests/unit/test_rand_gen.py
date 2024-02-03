@@ -7,11 +7,6 @@ from app.services.rand_gen import RandomGen
 
 
 @pytest.fixture
-def count_items(faker):
-    return faker.pyint(min_value=2, max_value=9)
-
-
-@pytest.fixture
 def values(faker, count_items):
     result = [faker.unique.pyint(min_value=-10, max_value=10) for _ in range(count_items)]
     faker.unique.clear()
