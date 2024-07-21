@@ -8,8 +8,8 @@ exclude = [
     '.pytest_cache',
     '.github',
 ]
-select = ['ALL']
-ignore = [
+lint.select = ['ALL']
+lint.ignore = [
     'ANN101',  # missing-type-self
     'EM',  # flake8-errmsg
     'D100', 'D101', 'D102', 'D103', 'D104', 'D105', 'D106', 'D107', 'D203', 'D212',  # pydocstyle
@@ -17,19 +17,20 @@ ignore = [
     'PD011',  # False positive, see https://github.com/astral-sh/ruff/issues/2480
 ]
 
-[tool.ruff.flake8-quotes]
+[tool.ruff.lint.flake8-quotes]
 inline-quotes = 'single'
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 lines-after-imports = 2
 known-first-party = ['app']
 
-[tool.ruff.extend-per-file-ignores]
-"tests/*" = [
-    "ANN",  # flake8-annotations
-    "PT001",  # Use @pytest.fixture{expected} over @pytest.fixture{actual}
-    "S101",  # Use of assert detected
-    "PT018",  # Assertion should be broken down into multiple parts
+[tool.ruff.lint.per-file-ignores]
+'tests/*' = [
+    'ANN',  # flake8-annotations
+    'PT001',  # Use @pytest.fixture{expected} over @pytest.fixture{actual}
+    'S101',  # Use of assert detected
+    'PT018',  # Assertion should be broken down into multiple parts
+    'RUF018',  # Avoid assignment expressions in `assert` statements
 ]
 
 
@@ -80,24 +81,24 @@ repository = 'https://github.com/Sanchoyzer/caraconnect'
 [tool.poetry.dependencies]
 python = '^3.11'
 fastapi = {extras = ['all'], version = '^0'}
-uvicorn = {extras = ['standard'], version = '^0.22.0'}
-gunicorn = '^20.1.0'
-sentry-sdk = {extras = ['fastapi'], version = '^1.27.0'}
-httpx = '^0.24.1'
+uvicorn = {extras = ['standard'], version = '^0.30.0'}
+gunicorn = '^22.0.0'
+sentry-sdk = '^2.10.0'
+httpx = '^0.27.0'
 
 [tool.poetry.group.dev.dependencies]
 mypy = '^1.8.0'
-ruff = '^0.1.15'
-black = '^23.1.0'
+ruff = '^0.5.0'
+black = '^24.4.2'
 bandit = '^1.7.5'
 
 [tool.poetry.group.test.dependencies]
-faker = '^18.0.0'
-pytest = '^7.2.1'
-pytest-sugar = '^0.9.6'
+faker = '^26.0.0'
+pytest = '^8.3.1'
+pytest-sugar = '^1.0.0'
 pytest-xdist = '^3.3.1'
-pytest-cov = '^4.1.0'
-pytest-asyncio = '^0.21.0'
+pytest-cov = '^5.0.0'
+pytest-asyncio = '^0.23.8'
 pytest-randomly = '^3.15.0'
 pytest-deadfixtures = '^2.2.1'
 

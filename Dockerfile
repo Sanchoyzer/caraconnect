@@ -8,7 +8,7 @@ ENV PYTHONPATH=/srv/src
 WORKDIR /srv/src
 
 COPY pyproject.toml poetry.lock ./
-RUN poetry install --without=dev,test
+RUN poetry install --only=main
 
 
 FROM base as development

@@ -82,7 +82,7 @@ class TestSetParams:
 
     @pytest.mark.asyncio()
     async def test_creation_zero_len(self, client, path_create):
-        payload = {'values': [], 'probabilities': []}
+        payload: dict[str, list] = {'values': [], 'probabilities': []}
         r = await client.post(path_create, json=payload)
         assert r.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, r.text
         assert (r_json := r.json())

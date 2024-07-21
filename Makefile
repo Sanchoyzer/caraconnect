@@ -9,11 +9,11 @@ black:
 
 .PHONY: ruff
 ruff:
-	ruff ${PROJ_PATH} ${TESTS_PATH}
+	ruff check --output-format=concise ${PROJ_PATH} ${TESTS_PATH}
 
 .PHONY: mypy
 mypy:
-	mypy ${PROJ_PATH}
+	mypy ${PROJ_PATH} ${TESTS_PATH}
 
 .PHONY: bandit
 bandit:
