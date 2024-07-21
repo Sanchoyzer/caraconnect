@@ -12,7 +12,18 @@
 
 ---
 
-### Original task
+### Technologies ###
+
+- [python](https://www.python.org/)
+- [docker](https://www.docker.com/)
+- [docker-compose](https://docs.docker.com/compose/)
+- [poetry](https://python-poetry.org/docs/)
+- [make](https://www.gnu.org/software/make/)
+- [pre-commit](https://pre-commit.com/)
+
+---
+
+### Original task ###
 
 Implement the method `nextNum()` and an effective set of deterministic unit tests.
 Make sure your code is exemplary, as if it was going to be shipped as part of a production system.
