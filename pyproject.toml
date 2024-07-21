@@ -89,7 +89,7 @@ httpx = '^0.24.1'
 mypy = '^1.8.0'
 ruff = '^0.1.15'
 black = '^23.1.0'
-bandit = '^1.7.5'
+bandit = '^1.7.9'
 
 [tool.poetry.group.test.dependencies]
 faker = '^18.0.0'
