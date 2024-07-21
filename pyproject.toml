@@ -86,7 +86,7 @@ sentry-sdk = {extras = ['fastapi'], version = '^1.27.0'}
 httpx = '^0.24.1'
 
 [tool.poetry.group.dev.dependencies]
-mypy = '^1.8.0'
+mypy = '^1.11.0'
 ruff = '^0.1.15'
 black = '^23.1.0'
 bandit = '^1.7.5'
