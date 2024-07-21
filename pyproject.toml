@@ -80,7 +80,7 @@ repository = 'https://github.com/Sanchoyzer/caraconnect'
 [tool.poetry.dependencies]
 python = '^3.11'
 fastapi = {extras = ['all'], version = '^0'}
-uvicorn = {extras = ['standard'], version = '^0.22.0'}
+uvicorn = {extras = ['standard'], version = '^0.30.3'}
 gunicorn = '^20.1.0'
 sentry-sdk = {extras = ['fastapi'], version = '^1.27.0'}
 httpx = '^0.24.1'
