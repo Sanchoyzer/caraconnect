@@ -82,7 +82,7 @@ repository = 'https://github.com/Sanchoyzer/caraconnect'
 python = '^3.11'
 fastapi = {extras = ['all'], version = '^0'}
 uvicorn = {extras = ['standard'], version = '^0.30.0'}
-gunicorn = '^22.0.0'
+gunicorn = '^23.0.0'
 sentry-sdk = '^2.10.0'
 httpx = '^0.27.0'
 
