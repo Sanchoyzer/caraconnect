@@ -7,7 +7,7 @@ def path_():
     return '/health'
 
 
-@pytest.mark.asyncio()
+@pytest.mark.asyncio
 async def test_health(client, path_):
     r = await client.get(path_)
     assert r.status_code == status.HTTP_200_OK, r.text

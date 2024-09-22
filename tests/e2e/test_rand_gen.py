@@ -56,7 +56,7 @@ async def create_params(f_create_params):
 
 
 class TestSetParams:
-    @pytest.mark.asyncio()
+    @pytest.mark.asyncio
     async def test_ok(self, client, path_create, values, probabilities):
         payload = {'values': values, 'probabilities': probabilities}
         r = await client.post(path_create, json=payload)
@@ -65,7 +65,7 @@ class TestSetParams:
         assert r_json['values'] == payload['values']
         assert r_json['probabilities'] == payload['probabilities']
 
-    @pytest.mark.asyncio()
+    @pytest.mark.asyncio
     async def test_creation_incorrect_len(self, client, path_create, values, probabilities):
         values_short = values[1:]
         payload = {'values': values_short, 'probabilities': probabilities}
@@ -80,7 +80,7 @@ class TestSetParams:
         assert r.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, r.text
         assert 'Different lens' in r.json()['detail'][0]['msg']
 
-    @pytest.mark.asyncio()
+    @pytest.mark.asyncio
     async def test_creation_zero_len(self, client, path_create):
         payload: dict[str, list] = {'values': [], 'probabilities': []}
         r = await client.post(path_create, json=payload)
@@ -90,7 +90,7 @@ class TestSetParams:
         for i in range(len(payload)):
             assert r_json['detail'][i]['msg'] == error_msg, r_json
 
-    @pytest.mark.asyncio()
+    @pytest.mark.asyncio
     async def test_creation_non_uniq_values(self, client, path_create, values, probabilities):
         values[1] = values[0]
         payload = {'values': values, 'probabilities': probabilities}
@@ -98,7 +98,7 @@ class TestSetParams:
         assert r.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, r.text
         assert 'Non uniq values' in r.json()['detail'][0]['msg']
 
-    @pytest.mark.asyncio()
+    @pytest.mark.asyncio
     async def test_creation_incorrect_probs(self, client, path_create, values, probabilities):
         probabilities[0] = -probabilities[0]
         payload = {'values': values, 'probabilities': probabilities}
@@ -112,7 +112,7 @@ class TestSetParams:
         assert r.status_code == status.HTTP_422_UNPROCESSABLE_ENTITY, r.text
         assert 'Incorrect values of probabilities' in r.json()['detail'][0]['msg']
 
-    @pytest.mark.asyncio()
+    @pytest.mark.asyncio
     async def test_creation_incorrect_sum_of_probs(
         self,
         client,
@@ -128,21 +128,21 @@ class TestSetParams:
 
 
 class TestGetValues:
-    @pytest.mark.asyncio()
+    @pytest.mark.asyncio
     async def test_ok(self, client, path_get, values):
         r = await client.get(path_get)
         assert r.status_code == status.HTTP_200_OK, r.text
         assert (r_json := r.json()) and len(r_json['values']) == 1, r.text
         assert r_json['values'][0] in values
 
-    @pytest.mark.asyncio()
+    @pytest.mark.asyncio
     async def test_ok_several_input_data(self, client, path_get_template, faker, f_create_params):
         for uid in [await f_create_params() for _ in range(faker.pyint(min_value=2, max_value=9))]:
             r = await client.get(path_get_template.format(uid=uid))
             assert r.status_code == status.HTTP_200_OK, r.text
             assert (r_json := r.json()) and len(r_json['values']) == 1, r.text
 
-    @pytest.mark.asyncio()
+    @pytest.mark.asyncio
     async def test_ok_several_values(self, client, path_get, faker, values):
         amount = faker.pyint(min_value=2, max_value=9)
         r = await client.get(path_get, params={'amount': amount})
@@ -150,7 +150,7 @@ class TestGetValues:
         assert (r_json := r.json()) and len(r_json['values']) == amount, r.text
         assert all(v in values for v in r_json['values'])
 
-    @pytest.mark.asyncio()
+    @pytest.mark.asyncio
     async def test_non_existing_uid(self, client, path_get_fake):
         r = await client.get(path_get_fake)
         assert r.status_code == status.HTTP_404_NOT_FOUND, r.text
